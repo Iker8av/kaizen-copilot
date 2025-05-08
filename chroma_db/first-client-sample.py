@@ -1,17 +1,3 @@
-# import asyncio
-# import chromadb
-# # Example setup of the client to connect to your chroma server
-# client = chromadb.HttpClient(host='localhost', port=8000)
-
-# async def main():           
-#     collection = await client.create_collection(name="my_collection")
-#     await collection.add(
-#         documents=["hello world"],
-#         ids=["id1"]
-#     )
-
-# asyncio.run(main())
-
 from chromadb import HttpClient
 from chromadb.config import Settings
 settings = Settings(chroma_api_impl="chromadb.api.fastapi.FastAPI")
