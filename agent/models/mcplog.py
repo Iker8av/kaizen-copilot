@@ -6,9 +6,9 @@ from uuid import UUID
 from agent.models.mcpstep import MCPStep
 
 @dataclass
-class MCPStep():
+class MCPLog():
     id: UUID
-    role: List[MCPStep]
+    steps: List[MCPStep]
     created_at: datetime
     
     def get_latest() -> MCPStep:
