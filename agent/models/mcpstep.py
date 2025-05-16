@@ -25,5 +25,5 @@ class MCPStep():
     output: OutputBase
     created_at: datetime
     
-    def export() -> dict[str, any]:
+    def export(self) -> dict[str, any]:
         pass

@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List
 
+from agent.models.embedded_file import EmbeddedFile
 from agent.models.file import File
 from agent.models.issue import Issue
 
@@ -17,3 +18,7 @@ class FileBaseOutput(OutputBase):
 @dataclass
 class ModelOutput(OutputBase):
     patch: str 
+
+@dataclass
+class EmbeddedFileOutput(OutputBase):
+    EmbeddedFiles: List[EmbeddedFile] 

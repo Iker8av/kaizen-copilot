@@ -10,5 +10,5 @@ class Context():
     issue: Issue
     retrieved_files: List[File]
     
-    def all_files_completed() -> bool:
+    def all_files_completed(self) -> bool:
         pass

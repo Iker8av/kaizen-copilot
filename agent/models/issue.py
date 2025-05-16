@@ -9,6 +9,6 @@ class Issue():
     description: str
     repo_url: str
     
-    def fetch_repo() -> None:
+    def fetch_repo(self) -> None:
         pass
     

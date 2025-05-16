@@ -7,7 +7,7 @@ from agent.models.issue import Issue
 
 class InputBase(ABC):
     @abstractmethod
-    def get_input() -> dict[str, any]:
+    def get_input(self) -> dict[str, any]:
         pass
 
 @dataclass

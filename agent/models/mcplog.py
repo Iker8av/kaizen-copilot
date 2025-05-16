@@ -11,11 +11,13 @@ class MCPLog():
     steps: List[MCPStep]
     created_at: datetime
     
-    def get_latest() -> MCPStep:
+    # def _
+    
+    def get_latest(self) -> MCPStep:
         pass
     
     def append_step(step: MCPStep) -> None:
         pass
     
-    def export() -> dict[str, any]:
+    def export(self) -> dict[str, any]:
         pass
