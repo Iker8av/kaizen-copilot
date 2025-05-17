@@ -1,14 +1,13 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List
+from typing import List, TypeVar
 
 from agent.models.file import File
 from agent.models.issue import Issue
 
-class InputBase(ABC):
-    @abstractmethod
-    def get_input(self) -> dict[str, any]:
-        pass
+class InputBase(ABC): pass
+
+InT = TypeVar("InT", bound=InputBase)
 
 @dataclass
 class QueryFormatterInput(InputBase):
@@ -18,6 +17,3 @@ class QueryFormatterInput(InputBase):
 class FileBaseInput(InputBase):
     files: List[File] 
     
-@dataclass
-class QueryFormatterInput(InputBase):
-    repo_url: str 

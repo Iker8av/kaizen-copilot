@@ -1,15 +1,18 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import List
+from typing import List, TypeVar
 
 from agent.models.embedded_file import EmbeddedFile
 from agent.models.file import File
 from agent.models.issue import Issue
 
-class OutputBase(ABC):
-    @abstractmethod
-    def get_output() -> dict[str, any]:
-        pass
+class OutputBase(ABC): pass
+
+OutT = TypeVar("OutT", bound=OutputBase)
+    
+@dataclass
+class QueryFormatterOutput(OutputBase):
+    embedded_file: EmbeddedFile
     
 @dataclass
 class FileBaseOutput(OutputBase):

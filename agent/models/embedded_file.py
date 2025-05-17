@@ -1,30 +1,28 @@
 
-from dataclasses import dataclass
-from enum import Enum
-from typing import List, Optional, Tuple
-from uuid import UUID
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional, Tuple
+from uuid import UUID, uuid4
+
+from agent.models.metadata import Metadata
 
 
 @dataclass
 class EmbeddedFile():
-    id: UUID
     document: str
-    embeddings: List[float]
-    content: Optional[str]
-    metadata: "Metadata"
+    metadata: Metadata
+    embeddings: List[float] = field(default_factory=list)
+    id: UUID = field(default_factory=uuid4)
     
     def convert_to_file(self) -> bool:
         pass
     
     @staticmethod
-    def get_elements(files: List["EmbeddedFile"]) -> Tuple[List[UUID], List[str], List[List[float]], List[dict[str, str]]]:
+    def get_elements(files: List["EmbeddedFile"]) -> Tuple[List[UUID], List[str], List[List[float]], List[Dict[str, str]]]:
         pass
     
-@dataclass
 class Metadata():
-    name: str
-    path: str
-    extension: str
-    
-    def export(self) -> dict[str, str]:
+    def __init__(self, extension: Optional[str]):
+        self.extension: str = extension
+        self.name: str = ""
+        self.path: str = ""
         pass

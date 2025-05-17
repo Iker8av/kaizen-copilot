@@ -4,7 +4,6 @@ from uuid import UUID
 
 @dataclass
 class Issue():
-    id: UUID
     title: str
     description: str
     repo_url: str
