@@ -3,13 +3,10 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 from uuid import UUID, uuid4
 
-from agent.models.metadata import Metadata
-
-
 @dataclass
 class EmbeddedFile():
     document: str
-    metadata: Metadata
+    metadata: "Metadata"
     embeddings: List[float] = field(default_factory=list)
     id: UUID = field(default_factory=uuid4)
     
