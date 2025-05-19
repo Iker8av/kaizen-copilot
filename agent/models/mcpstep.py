@@ -7,11 +7,13 @@ from uuid import UUID, uuid4
 from agent.models.context import Context
 from agent.models.input import InT, InputBase
 from agent.models.output import OutT, OutputBase
+from agent.tools.tool import Tool
 
 class ROLE(Enum):
     REPO_ADMIN = "REPO_ADMIN"
     QUERY_FORMATTER = "QUERY_FORMATTER"
     DEVELOPER = "DEVELOPER"
+    EMBEDDING = "EMBEDDING"
     CONTEXTUALIZER = "CONTEXTUALIZER"
 
 @dataclass
@@ -20,6 +22,8 @@ class MCPStep(Generic[InT, OutT]):
     role: str
     purpose: str
     input_data: InT
+    context: Context 
+    tool: Optional[Tool] = None
     id: UUID = field(default_factory=uuid4)
     output_data: Optional[OutT] = None
     observations: Optional[str] = None

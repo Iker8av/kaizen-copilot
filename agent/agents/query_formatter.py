@@ -1,6 +1,6 @@
 from enum import Enum
 import re
-from typing import Optional
+from typing import Optional, Tuple
 
 from agent.models.agentbase import AgentBase
 from agent.models.context import Context
@@ -43,20 +43,17 @@ def get_extension(language: str) -> Optional[str]:
     
 class QueryFormatter(AgentBase[QueryFormatterInput, QueryFormatterOutput]):
     def __init__(self):
+        super().__init__()
         self.aget_name: str = "QueryFormatter"
-        self.agent_input: InputBase = None
-        self.output: OutputBase = None
         self.role: ROLE = ROLE.QUERY_FORMATTER
-        self.context: Context = None
         self.purpose: str = "Format the issue to solve to create a properly query to find the files"
-        self.step: Optional[MCPStep] = None
         pass
     
-    def run(self, input_data: QueryFormatterInput) -> QueryFormatterOutput:
+    def run(self, input_data: QueryFormatterInput, context: Context) -> Tuple[QueryFormatterOutput, Context]:
+        self.context = context
         issue_description = input_data.issue.description
-        
+        self.context.issue = input_data.issue
         match = re.search(r"```(\w+)?\n(.*?)```", issue_description, re.DOTALL)
-
 
         if match:
             language = match.group(1)
@@ -70,7 +67,7 @@ class QueryFormatter(AgentBase[QueryFormatterInput, QueryFormatterOutput]):
             
             metadata = Metadata(extension=extension)
             
-            return EmbeddedFile(document=final_string, metadata=metadata)
+            return QueryFormatterOutput([EmbeddedFile(document=final_string, metadata=metadata)]), self.context
         else:
             raise Exception("No match found")
         

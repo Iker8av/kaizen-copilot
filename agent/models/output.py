@@ -12,7 +12,7 @@ OutT = TypeVar("OutT", bound=OutputBase)
     
 @dataclass
 class QueryFormatterOutput(OutputBase):
-    embedded_file: EmbeddedFile
+    embedded_files: List[EmbeddedFile]
     
 @dataclass
 class FileBaseOutput(OutputBase):
@@ -24,4 +24,4 @@ class ModelOutput(OutputBase):
 
 @dataclass
 class EmbeddedFileOutput(OutputBase):
-    EmbeddedFiles: List[EmbeddedFile] 
+    embedded_files: List[EmbeddedFile] 
