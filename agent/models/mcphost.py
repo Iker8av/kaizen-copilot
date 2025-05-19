@@ -4,15 +4,12 @@ from agent.agents.query_formatter import QueryFormatter
 from agent.models.agentbase import AgentBase
 from agent.models.context import Context
 from agent.models.input import InputBase
-from agent.models.issue import Issue
 from agent.models.mcplog import MCPLog
 from agent.models.mcpstep import MCPStep
-from agent.models.output import FileBaseOutput
-
 
 class MCPHost:
     def __init__(self):
-        self.log = MCPLog()
+        self.__log = MCPLog()
         self.workflows: Dict[str, List[AgentBase]] = {
             "issue_resolution": [QueryFormatter(), EmbeddingModel()],
         }
@@ -33,8 +30,8 @@ class MCPHost:
                 input_data=input_data,
                 output_data=output_data,
             )
-            self.log.add_step(step)
+            self.__log.add_step(step)
             input_data = output_data  
             
     def get_log(self) -> MCPLog:
-        return self.log
+        return self.__log
