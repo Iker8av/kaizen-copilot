@@ -15,6 +15,7 @@ class ROLE(Enum):
     DEVELOPER = "DEVELOPER"
     EMBEDDING = "EMBEDDING"
     CONTEXTUALIZER = "CONTEXTUALIZER"
+    FILE_RESOLVER = "FILE_RESOLVER"
 
 @dataclass
 class MCPStep(Generic[InT, OutT]):
