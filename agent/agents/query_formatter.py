@@ -67,7 +67,7 @@ class QueryFormatter(AgentBase[QueryFormatterInput, QueryFormatterOutput]):
             
             metadata = Metadata(extension=extension)
             
-            return QueryFormatterOutput([EmbeddedFile(document=final_string, metadata=metadata)]), self.context
+            return QueryFormatterOutput([EmbeddedFile(document=final_string, metadata=metadata)]), self.context, 1
         else:
             raise Exception("No match found")
         

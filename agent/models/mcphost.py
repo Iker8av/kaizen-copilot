@@ -19,19 +19,23 @@ class MCPHost:
         input_data = initial_input
         context = Context(name)
         
-        for agent in agents:
-            output_data, context = agent.run(input_data, context)
+        # for agent in agents:
+        idx = 0
+        while (idx < len(agents)):
+            output_data, context, next_step = agents[idx].run(input_data, context)
             step = MCPStep(
-                agent_name=agent.__class__.__name__,
-                tool=agent.tool,
-                role=agent.role,
-                purpose=agent.purpose,
+                agent_name=agents[idx].__class__.__name__,
+                tool=agents[idx].tool,
+                role=agents[idx].role,
+                purpose=agents[idx].purpose,
                 context=context,
                 input_data=input_data,
                 output_data=output_data,
             )
             self.__log.add_step(step)
             input_data = output_data  
+            
+            idx += next_step
             
     def get_log(self) -> MCPLog:
         return self.__log

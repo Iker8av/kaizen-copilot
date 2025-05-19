@@ -17,5 +17,5 @@ class AgentBase(ABC, Generic[InT, OutT]):
         self.purpose: str = ""
 
     @abstractmethod
-    def run(self, input_data: InT, context: Context) -> Tuple[OutT, Context]:
+    def run(self, input_data: InT, context: Context) -> Tuple[OutT, Context, int]:
         pass

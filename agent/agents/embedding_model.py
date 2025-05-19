@@ -30,4 +30,4 @@ class EmbeddingModel(AgentBase[EmbeddedFileInput, EmbeddedFileOutput]):
             
         results = self.tool.execute(workflow=context.workflow, inputs=embedded_files, context=context)      
                     
-        return EmbeddedFileOutput(results), self.context
+        return EmbeddedFileOutput(results), self.context, 1
