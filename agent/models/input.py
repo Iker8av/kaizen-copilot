@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from dataclasses import dataclass
 from typing import List, TypeVar
 
-from agent.models.embedded_file import EmbeddedFile
+from agent.models.embedded_file import  Metadata
 from agent.models.file import File
 from agent.models.issue import Issue
 
@@ -19,6 +19,7 @@ class FileInput(InputBase):
     files: List[File] 
     
 @dataclass
-class EmbeddedFileInput(InputBase):
-    embedded_files: List[EmbeddedFile] 
+class EmbeddingModelInput(InputBase):
+    query: List[str]
+    metadata: Metadata
     

@@ -19,11 +19,11 @@ class ChromaDB(Tool):
             return self.query_chroma(inputs)
         pass
         
-    def query_chroma(self, embedding_files: List[EmbeddedFile]) -> List[EmbeddedFile]:
+    def query_chroma(self, embedding_files: List[float]) -> List[EmbeddedFile]:
         results = []
         for embedding_file in embedding_files:
             results.append(self.collection.query(
-                query_embeddings=embedding_file.embeddings, 
+                query_embeddings=embedding_file, 
                 # where={"extension": embedding_file.metadata.extension},
                 n_results=1 ,
                 include=["documents", "metadatas", "embeddings"]

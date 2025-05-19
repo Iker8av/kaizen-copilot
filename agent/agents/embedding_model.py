@@ -1,33 +1,37 @@
-from typing import Tuple
+from typing import List, Tuple
 from sentence_transformers import SentenceTransformer
 
 from agent.models.agentbase import AgentBase
 from agent.models.context import Context
-from agent.models.input import EmbeddedFileInput
+from agent.models.input import EmbeddingModelInput
 from agent.models.mcpstep import ROLE
-from agent.models.output import EmbeddedFileOutput
+from agent.models.output import  FileBaseOutput
 from agent.tools.chromadb import ChromaDB
-from agent.tools.tool import Tool
 
 
-class EmbeddingModel(AgentBase[EmbeddedFileInput, EmbeddedFileOutput]):
+class EmbeddingModel(AgentBase[EmbeddingModelInput, FileBaseOutput]):
     def __init__(self):
         self.aget_name: str = "EmbeddingModel"
         self.role: ROLE = ROLE.EMBEDDING
-        self.tool: Tool = ChromaDB()
+        self.tool: ChromaDB = ChromaDB()
         self.purpose: str = "Creates Embedding of the files to story or query in the vector database"
         
         self.__model = SentenceTransformer('all-MiniLM-L6-v2')
         pass
     
-    def run(self, input_data: EmbeddedFileInput, context: Context) -> Tuple[EmbeddedFileOutput, Context]:
+    def run(self, input_data: EmbeddingModelInput, context: Context) -> Tuple[FileBaseOutput, Context]:
         self.context = context
-        embedded_files = input_data.embedded_files
+        queries = input_data.query
         
-        for embedded_file in embedded_files:           
-            embedding = self.__model.encode(embedded_file.document)
-            embedded_file.embeddings = embedding.tolist()   
+        embeddings = []
+        
+        for query in queries:           
+            embedding = self.__model.encode(query)
+            embeddings.append(embedding.tolist())
             
-        results = self.tool.execute(workflow=context.workflow, inputs=embedded_files, context=context)      
+        results = self.tool.execute(workflow=context.workflow, inputs=embeddings, context=context)      
+        files = [result.convert_to_file_class(context) for result in results]
+        
+        self.context.retrieved_files.extend(files)
                     
-        return EmbeddedFileOutput(results), self.context, 1
+        return files, self.context, 1

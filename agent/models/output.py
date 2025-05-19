@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import List, TypeVar
 
-from agent.models.embedded_file import EmbeddedFile
+from agent.models.embedded_file import EmbeddedFile, Metadata
 from agent.models.file import File
 from agent.models.issue import Issue
 
@@ -12,7 +12,8 @@ OutT = TypeVar("OutT", bound=OutputBase)
     
 @dataclass
 class QueryFormatterOutput(OutputBase):
-    embedded_files: List[EmbeddedFile]
+    query: List[str]
+    metadata: Metadata
     
 @dataclass
 class FileBaseOutput(OutputBase):
