@@ -6,8 +6,8 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello World'
 
-@app.route('/test_args', methods=['GET'])
-def test_args():
+@app.route('/fix_issue', methods=['GET'])
+def fix_issue():
     if request.method =='GET':
         text = request.get_json()
         return text
