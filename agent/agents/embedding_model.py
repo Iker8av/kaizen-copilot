@@ -19,7 +19,7 @@ class EmbeddingModel(AgentBase[EmbeddingModelInput, FileBaseOutput]):
         self.__model = SentenceTransformer('all-MiniLM-L6-v2')
         pass
     
-    def run(self, input_data: EmbeddingModelInput, context: Context) -> Tuple[FileBaseOutput, Context]:
+    def run(self, input_data: EmbeddingModelInput, context: Context) -> Tuple[FileBaseOutput, Context, int]:
         self.context = context
         queries = input_data.query
         

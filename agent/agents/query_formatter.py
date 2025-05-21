@@ -49,7 +49,7 @@ class QueryFormatter(AgentBase[QueryFormatterInput, QueryFormatterOutput]):
         self.purpose: str = "Format the issue to solve to create a properly query to find the files"
         pass
     
-    def run(self, input_data: QueryFormatterInput, context: Context) -> Tuple[QueryFormatterOutput, Context]:
+    def run(self, input_data: QueryFormatterInput, context: Context) -> Tuple[QueryFormatterOutput, Context, int]:
         self.context = context
         issue_description = input_data.issue.description
         self.context.issue = input_data.issue
