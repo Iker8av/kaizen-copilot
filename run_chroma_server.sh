@@ -1,1 +1,0 @@
-chroma run --path ./chroma_db/db --host localhost --port 8005
