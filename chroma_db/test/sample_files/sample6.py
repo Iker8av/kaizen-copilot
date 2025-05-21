@@ -1,5 +1,7 @@
 import random
 
+from chroma_db.test.sample_files.sample2 import say_hi
+
 guesses_made = 0
 
 name = input('Hello! What is your name?\n')
@@ -10,6 +12,8 @@ print ('Well, {0}, I am thinking of a number between 1 and 20.'.format(name))
 while guesses_made < 6:
 
     guess = int(input('Take a guess: '))
+    
+    say_hi()
 
     guesses_made += 1
 

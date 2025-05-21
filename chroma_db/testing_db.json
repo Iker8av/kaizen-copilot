@@ -1,0 +1,22 @@
+{
+  "ids": [["sample2"]],
+  "distances": [[1.0539296]],
+  "embeddings": "None",
+  "metadatas": [
+    [
+      {
+        "extension": "python",
+        "name": "sample2.py",
+        "path": "sample_files/sample2.py"
+      }
+    ]
+  ],
+  "documents": [
+    [
+      "/Users/ikerochoa/Desktop/Tec/8vo Sementre/kaizen-copilot/chroma_db/test/sample_files/sample2.py # ejemplo_avanzado.py\n\ndef dividir(a, b):\n    ***Devuelve el resultado de dividir a entre b, manejando división por cero.***\n    try:\n        resultado = a / b\n    except ZeroDivisionError:\n        return 'Error: No se puede dividir entre cero.'\n    else:\n        return resultado\n\ndef say_hi(nombre, saludo='Hola'):\n    ***Imprime un saludo personalizado, con saludo opcional.***\n    print(f'{saludo}, {nombre}!')\n\ndef promedio_lista(numeros):\n    ***Calcula el promedio de una lista de números.***\n    if not numeros:\n        return 0\n    return sum(numeros) / len(numeros)\n\ndef contar_ocurrencias(lista):\n    ***Devuelve un diccionario con el conteo de ocurrencias de cada elemento.***\n    conteo = {}\n    for elemento in lista:\n        if elemento in conteo:\n            conteo[elemento] += 1\n        else:\n            conteo[elemento] = 1\n    return conteo\n\n# Código de prueba si ejecutas este archivo directamente\nif __name__ == '__main__':\n    print('División 10 / 2:', dividir(10, 2))\n    print('División 10 / 0:', dividir(10, 0))\n\n    say_hi('Iker')\n    say_hi('Iker', saludo='¡Qué tal')\n\n    lista = [1, 2, 3, 4, 5]\n    print('Promedio de lista:', promedio_lista(lista))\n\n    elementos = ['manzana', 'pera', 'manzana', 'naranja', 'pera', 'manzana']\n    print('Conteo de ocurrencias:', contar_ocurrencias(elementos))"
+    ]
+  ],
+  "uris": "None",
+  "data": "None",
+  "included": ["metadatas", "documents", "distances"]
+}

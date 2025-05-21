@@ -135,7 +135,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-chroma_db/db/
 
 # Spyder project settings
 .spyderproject
@@ -173,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Additional Folders
+chroma_db/db/
+main_test.py
