@@ -20,10 +20,6 @@ class EmbeddedFile():
         file_type = FILE_TYPE.MAIN_FILE if len(context.retrieved_files) == 0 else FILE_TYPE.DEPENDENCY
         return File(name=self.metadata.name, path=self.metadata.path, content=code, extension=self.metadata.extension, file_type=file_type)
     
-    @staticmethod
-    def get_elements(files: List["EmbeddedFile"]) -> Tuple[List[UUID], List[str], List[List[float]], List[Dict[str, str]]]:
-        pass
-    
     @classmethod
     def convert_query_result_to_embedding(cls, result: QueryResult) -> "EmbeddedFile":
         query_metadata = result["metadatas"][0][0]

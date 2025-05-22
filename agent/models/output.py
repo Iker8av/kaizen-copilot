@@ -12,7 +12,7 @@ OutT = TypeVar("OutT", bound=OutputBase)
     
 @dataclass
 class QueryFormatterOutput(OutputBase):
-    query: List[str]
+    queries: List[str]
     metadata: Metadata
     
 @dataclass

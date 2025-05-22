@@ -7,7 +7,3 @@ class Issue():
     title: str
     description: str
     repo_url: str
-    
-    def fetch_repo(self) -> None:
-        pass
-    

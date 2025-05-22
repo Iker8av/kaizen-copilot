@@ -96,4 +96,4 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
                     queries.append(query) 
                     
                 
-            return QueryFormatterOutput(query=queries, metadata=None), self.context, -1
+            return QueryFormatterOutput(queries=queries, metadata=None), self.context, -1
