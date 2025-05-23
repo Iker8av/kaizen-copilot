@@ -21,4 +21,4 @@ class File():
     def convert_to_embedding(self) -> "EmbeddedFile": # type: ignore
         from agent.models.embedded_file import EmbeddedFile, Metadata
         metadata = Metadata(extension=self.extension, name=self.name, path=self.path)
-        return EmbeddedFile(metadata=metadata, document="")
+        return EmbeddedFile(metadata=metadata, document=self.content)
