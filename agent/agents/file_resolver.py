@@ -1,7 +1,10 @@
 import re
 from typing import Tuple, Union
+
+from chromadb import Where
 from agent.models.agentbase import AgentBase
 from agent.models.context import Context
+from agent.models.embedded_file import Metadata
 from agent.models.input import  FileInput
 from agent.models.mcpstep import ROLE
 from agent.models.output import FileBaseOutput, QueryFormatterOutput
@@ -26,6 +29,7 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
             code = main_file.content
             
             queries: list[str] = []
+            conditionals: list[Where] = []
             if extension == "py":
                 from_imports: list[str] = re.findall(r'^\s*from\s+[a-zA-Z_][\w\.]*\s+import\s+[a-zA-Z_][\w]*', code, re.MULTILINE)
                 unique_paths = []
@@ -65,6 +69,10 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
                     
                     print(query)
                     unique_paths.append(relative_path)
+                    
+                    folders = relative_path.split("/")
+                    short_path = ("/".join(folders[-2:])) + ".py"
+                    conditionals.append({"path": short_path})
                     queries.append(query)
                 
             elif extension == "c" or extension == "cpp":
@@ -79,6 +87,7 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
                     
                     query = f"/{dependencies_name}\n#ifndef {class_name.upper()}_H\n#define {class_name.upper()}_H\nclass {class_name} "+"{"+"\npublic:\nclass file"
                     
+                    conditionals.append({"path": dependencies_name})
                     queries.append(query) 
                     
             elif extension == "java":
@@ -93,7 +102,15 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
                     class_name = dependencies_name.split(".")[-1]
                     package_name = dependencies_name.split(".")[0]
                     query = f"/{relative_path} package {package_name};\npublic class {class_name} " + "{" 
+                    
+                    folders = relative_path.split("/")
+                    
+                    short_path = ("/".join(folders[-2:])) + ".java"
+                    conditionals.append({"path": short_path})
                     queries.append(query) 
                     
                 
-            return QueryFormatterOutput(queries=queries, metadata=None), self.context, -1
+            return QueryFormatterOutput(queries=queries, conditionals=conditionals), self.context, -1
+        
+    def extract_relative_path(path: str) -> str:
+        pass
