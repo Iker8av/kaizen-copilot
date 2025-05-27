@@ -1,5 +1,5 @@
 from typing import List
-from chromadb import chromadb, QueryResult
+from chromadb import Where, chromadb, QueryResult
 from agent.models.context import Context
 from agent.models.embedded_file import EmbeddedFile, Metadata
 from agent.tools.tool import Tool
@@ -11,20 +11,23 @@ class ChromaDB(Tool):
         self.chroma_client = chromadb.HttpClient(host="localhost", port=8005)
         self.collection = None
         
-    def execute(self, workflow, inputs: List[EmbeddedFile], context: Context) -> List[EmbeddedFile]:
+    def execute(self, workflow, inputs: List[float], context: Context, **kwargs) -> List[EmbeddedFile]:
         #! SET COLLECTION NAMING RULE
         self.collection = self.chroma_client.get_collection(name="code_files") 
         
         if workflow == "issue_resolution":
-            return self.query_chroma(inputs)
+            return self.query_chroma(embedding_files=inputs, conditionals=kwargs["conditionals"])
         pass
         
-    def query_chroma(self, embedding_files: List[float]) -> List[EmbeddedFile]:
+    def query_chroma(self, embedding_files: List[float], conditionals: List[Where]) -> List[EmbeddedFile]:
         results = []
-        for embedding_file in embedding_files:
+        if conditionals is None:
+            conditionals = [None] * len(embedding_files)
+    
+        for embedding_file, conditional in zip(embedding_files, conditionals):
             results.append(self.collection.query(
                 query_embeddings=embedding_file, 
-                # where={"extension": embedding_file.metadata.extension},
+                where=conditional,
                 n_results=1 ,
                 include=["documents", "metadatas", "embeddings"]
             ))
