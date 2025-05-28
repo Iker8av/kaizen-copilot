@@ -13,7 +13,7 @@ while guesses_made < 6:
 
     guess = int(input('Take a guess: '))
     
-    say_hi()
+    say_hi("Iker", 23)
 
     guesses_made += 1
 
