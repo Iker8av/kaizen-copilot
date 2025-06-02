@@ -12,8 +12,10 @@ class ChromaDB(Tool):
         self.collection = None
         
     def execute(self, workflow, inputs: List[float], context: Context, **kwargs) -> List[EmbeddedFile]:
-        #! SET COLLECTION NAMING RULE
-        self.collection = self.chroma_client.get_collection(name="code_files") 
+        repo_url = context.issue.repo_url
+        repo_name = "_".join(repo_url.split("/")[-2:])
+        
+        self.collection = self.chroma_client.get_collection(name=repo_name) 
         
         if workflow == "issue_resolution":
             return self.query_chroma(embedding_files=inputs, conditionals=kwargs["conditionals"])
