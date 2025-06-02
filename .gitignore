@@ -176,3 +176,4 @@ cython_debug/
 # Additional Folders
 chroma_db/db/
 main_test.py
+eval/custom_eval/data/training_data
