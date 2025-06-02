@@ -1,4 +1,4 @@
-import json
+import re
 import requests
 from agent.models.agentbase import AgentBase
 from agent.models.context import Context
@@ -20,11 +20,18 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
         
         self.__payload["prompt"] = prompt
         res = requests.post(self.__model_endpoint, json=self.__payload)
-        model_response = json.loads(res.text)
+        model_response = res.text
         
-        print("\nRESPONSE-----------------\n")
-        print(model_response['response'])
-        return LLMDeveloperOutput(resolution=res.text)
+        code_match = re.search(r"<code>(.*?)</code>", model_response, re.DOTALL)
+        changes_match = re.search(r"<changes>(.*?)</changes>", model_response, re.DOTALL)
+
+        if code_match:
+            code = code_match.group(1)
+            changes = changes_match.group(1)
+        else:
+            raise RuntimeError("No code has found <code>...</code>")
+
+        return LLMDeveloperOutput(fixed_code=code, comments=changes)
     
     def __format_prompt(self, files: list[File], context: Context) -> str:
         main_file = None
@@ -40,7 +47,7 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
         
         string_context_files = "\n\n".join(context_files)
         
-        prompt = f"""You are a software engineer developer and need to resolve the following issue, give me just the solved code between <code></code>:
+        prompt = f"""You are a software engineer developer and need to resolve the following issue, give me just the solved code between <code></code> and what changes were made between <changes></changes>:
 {issue_desciption}
 In this file:
 {main_file.name}
@@ -49,5 +56,5 @@ In this file:
 Also you are provided of additional files that can serve as context:
 {string_context_files}
 """
-        print(prompt)
+
         return prompt

@@ -26,4 +26,5 @@ class EmbeddedFileOutput(OutputBase):
     
 @dataclass
 class LLMDeveloperOutput(OutputBase):
-    resolution: str
+    fixed_code: str
+    comments:str
