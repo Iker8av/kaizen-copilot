@@ -19,11 +19,12 @@ class QueryFormatterOutput(OutputBase):
 @dataclass
 class FileBaseOutput(OutputBase):
     files: List[File] 
-    
-@dataclass
-class ModelOutput(OutputBase):
-    patch: str 
 
 @dataclass
 class EmbeddedFileOutput(OutputBase):
     embedded_files: List[EmbeddedFile] 
+    
+@dataclass
+class LLMDeveloperOutput(OutputBase):
+    fixed_code: str
+    comments:str

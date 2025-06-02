@@ -1,0 +1,42 @@
+{
+  "repo": {
+    "name": "Adobe-Consulting-Services/acs-aem-commons",
+    "buggy_commit": "a2cf90935d6166680ad85a9ac045e5060bf202ac",
+    "fixed_commit": "be4c5995f48fb4b25d56d6b20485d28d62d76479"
+  },
+  "input": {
+    "language": "Java",
+    "issue": {
+      "issue_title": "Reduce usage of Apache Commons Lang 2",
+      "issue_description": "\r\nApache commons lang 2 is not maintained anymore since years. Usage of it should be replaced with Apache Commons Lang 3. Both libraries are part of AEM as a Cloud Service and AEM 6.x, only a change of the imports is required.\r\n\r\nThere is one exception, the usage of AEMs MailTemplate API which currently does not provide an alternative. Once that is available we can change the last remaining usage of Apache commons lang 2.\r\n\r\n\r\n\r\n"
+    },
+    "buggy_commit_message": "Merge branch 'Adobe-Consulting-Services:master' into master",
+    "buggy_file": {
+      "buggy_filename": "bundle/src/main/java/com/adobe/acs/commons/dam/DAMFunctions.java",
+      "buggy_code": "/*\n * ACS AEM Commons\n *\n * Copyright (C) 2013 - 2023 Adobe\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *      http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\npackage com.adobe.acs.commons.dam;\n\nimport org.apache.commons.lang.StringUtils;\n\nimport org.osgi.annotation.versioning.ProviderType;\n\nimport com.day.cq.dam.api.Asset;\nimport com.day.cq.dam.api.DamConstants;\n\n/**\n * DAM JSP functions.\n */\n@ProviderType\npublic final class DAMFunctions {\n\n    private DAMFunctions() {\n    }\n\n    /**\n     * Return the title or name of the asset, if the title is not defined.\n     * \n     * @param asset the asset\n     * @return the asset title or name\n     */\n    public static String getTitleOrName(Asset asset) {\n        String title = asset.getMetadataValue(DamConstants.DC_TITLE);\n        return StringUtils.isNotBlank(title) ? title : asset.getName();\n    }\n\n}\n"
+    },
+    "context": [],
+    "unresolved_context": [
+      "org.apache.commons.lang.StringUtils",
+      "org.osgi.annotation.versioning.ProviderType",
+      "com.day.cq.dam.api.Asset",
+      "com.day.cq.dam.api.DamConstants"
+    ]
+  },
+  "output": {
+    "language": "Java",
+    "fixed_commit_message": "Reduce usage of Apache Commons Lang 2\nThis fixes #3408",
+    "fixed_file": {
+      "fixed_filename": "bundle/src/main/java/com/adobe/acs/commons/dam/DAMFunctions.java",
+      "fixed_code": "/*\n * ACS AEM Commons\n *\n * Copyright (C) 2013 - 2023 Adobe\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n *      http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n */\npackage com.adobe.acs.commons.dam;\n\nimport org.apache.commons.lang3.StringUtils;\n\nimport org.osgi.annotation.versioning.ProviderType;\n\nimport com.day.cq.dam.api.Asset;\nimport com.day.cq.dam.api.DamConstants;\n\n/**\n * DAM JSP functions.\n */\n@ProviderType\npublic final class DAMFunctions {\n\n    private DAMFunctions() {\n    }\n\n    /**\n     * Return the title or name of the asset, if the title is not defined.\n     * \n     * @param asset the asset\n     * @return the asset title or name\n     */\n    public static String getTitleOrName(Asset asset) {\n        String title = asset.getMetadataValue(DamConstants.DC_TITLE);\n        return StringUtils.isNotBlank(title) ? title : asset.getName();\n    }\n\n}\n"
+    },
+    "context": [],
+    "unresolved_context": [
+      "org.apache.commons.lang3.StringUtils",
+      "org.osgi.annotation.versioning.ProviderType",
+      "com.day.cq.dam.api.Asset",
+      "com.day.cq.dam.api.DamConstants"
+    ],
+    "changes_summary": "Code changed as follows:\n--- buggy\n+++ fixed\n@@ -17,7 +17,7 @@\n  */\n package com.adobe.acs.commons.dam;\n \n-import org.apache.commons.lang.StringUtils;\n+import org.apache.commons.lang3.StringUtils;\n \n import org.osgi.annotation.versioning.ProviderType;\n "
+  }
+}

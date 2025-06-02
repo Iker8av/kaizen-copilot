@@ -1,6 +1,7 @@
 from typing import Dict, List
 from agent.agents.embedding_model import EmbeddingModel
 from agent.agents.file_resolver import FileResolver
+from agent.agents.llm_developer import LLMDeveloper
 from agent.agents.query_formatter import QueryFormatter
 from agent.models.agentbase import AgentBase
 from agent.models.context import Context
@@ -12,7 +13,7 @@ class MCPHost:
     def __init__(self):
         self.__log = MCPLog()
         self.workflows: Dict[str, List[AgentBase]] = {
-            "issue_resolution": [QueryFormatter(), EmbeddingModel(), FileResolver()],
+            "issue_resolution": [QueryFormatter(), EmbeddingModel(), FileResolver(), LLMDeveloper()],
         }
 
     def run_workflow(self, name: str, initial_input: InputBase):
