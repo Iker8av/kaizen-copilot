@@ -1,5 +1,3 @@
-# kaizen-agent
-
 🎥 **Final Video**: [Watch on Google Drive](https://drive.google.com/drive/folders/1JUUSBSZ8gI0v1EvNHYSuj9nErVkY-xjG?usp=sharing)
 
 ---
@@ -50,6 +48,9 @@ conda activate kaizen-copilot
 Kaizen Copilot consists of several **agents** and **tools**, each with specific responsibilities. Its architecture follows the **MCP (Model-Context-Protocol)** pattern and is designed as a **RAG (Retrieval-Augmented Generation)** system to retrieve and use repository context effectively.
 
 ![Kaizen Architecture](arch.jpg)
+
+MCP Architecture
+![Kaizen MCP Architecture](mcp.jpg)
 
 ### Agents
 
