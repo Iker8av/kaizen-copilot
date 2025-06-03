@@ -17,7 +17,7 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
         self.role: ROLE = ROLE.FILE_RESOLVER
         self.tool: Tool = ChromaDB()
         self.purpose: str = "Ensure LLM Model will have enough context, if not, it wil iterate with the Vector DB"
-        self.__enable_context = True
+        self.__enable_context = False
     
     def run(self, _, context: Context) -> Tuple[Union[FileBaseOutput, QueryFormatterOutput], Context, int]:
         self.context = context
