@@ -21,7 +21,7 @@ class EmbeddingModel(AgentBase[EmbeddingModelInput, FileBaseOutput]):
     
     def run(self, input_data: EmbeddingModelInput, context: Context) -> Tuple[FileBaseOutput, Context, int]:
         self.context = context
-        queries = input_data.query
+        queries = input_data.queries
         
         embeddings = []
         
@@ -29,7 +29,7 @@ class EmbeddingModel(AgentBase[EmbeddingModelInput, FileBaseOutput]):
             embedding = self.__model.encode(query)
             embeddings.append(embedding.tolist())
             
-        results = self.tool.execute(workflow=context.workflow, inputs=embeddings, context=context)      
+        results = self.tool.execute(workflow=context.workflow, inputs=embeddings, context=context, conditionals=input_data.conditionals)      
         files = [result.convert_to_file_class(context) for result in results]
         
         self.context.retrieved_files.extend(files)

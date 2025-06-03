@@ -7,5 +7,5 @@ from agent.models.embedded_file import EmbeddedFile
 
 class Tool(ABC):    
     @abstractmethod
-    def execute(workflow: str, inputs: any, context: Context) -> any:
+    def execute(workflow: str, inputs: any, context: Context, **kwargs) -> any:
         pass
