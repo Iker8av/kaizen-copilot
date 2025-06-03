@@ -16,7 +16,7 @@ class EmbeddingModel(AgentBase[EmbeddingModelInput, FileBaseOutput]):
         self.tool: ChromaDB = ChromaDB()
         self.purpose: str = "Creates Embedding of the files to story or query in the vector database"
         
-        self.__model = SentenceTransformer('all-MiniLM-L6-v2')
+        self.__model = SentenceTransformer('BAAI/bge-large-en')
         pass
     
     def run(self, input_data: EmbeddingModelInput, context: Context) -> Tuple[FileBaseOutput, Context, int]:
