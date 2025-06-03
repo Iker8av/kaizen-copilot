@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from agent.models.mcphost import MCPHost
 from agent.models.issue import Issue
 from agent.models.input import QueryFormatterInput
@@ -20,7 +20,8 @@ def fix_issue():
        
         solution = host.run_workflow('issue_resolution', input_data)
 
-        return solution.get_json(), 200
+        return jsonify(solution, status=200)
+
 
 if __name__ == '__main__':
     app.run()
