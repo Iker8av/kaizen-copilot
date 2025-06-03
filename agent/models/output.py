@@ -27,4 +27,5 @@ class EmbeddedFileOutput(OutputBase):
 @dataclass
 class LLMDeveloperOutput(OutputBase):
     fixed_code: str
-    comments:str
+    comments: str
+    path_code: str

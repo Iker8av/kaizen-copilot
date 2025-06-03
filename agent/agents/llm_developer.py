@@ -30,7 +30,8 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
         
         fixed_code = self.__call_model(self.__api_key, prompt)
 
-        return LLMDeveloperOutput(fixed_code=fixed_code, comments=""), self.context, 1
+        main_file = next((input_files for input_files in input_data.files if input_files.file_type == FILE_TYPE.MAIN_FILE), None)
+        return LLMDeveloperOutput(fixed_code=fixed_code, path_code=main_file.path, comments=""), self.context, 1
    
     def __call_model(self, api_key: Optional[str], prompt: str) -> str:
         if api_key:
