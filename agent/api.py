@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
-from agent.models.mcphost import MCPHost
-from agent.models.issue import Issue
-from agent.models.input import QueryFormatterInput
+from models.mcphost import MCPHost
+from models.issue import Issue
+from models.input import QueryFormatterInput
 
 app = Flask(__name__)
 
