@@ -44,7 +44,7 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
                 model="claude-sonnet-4-20250514",
                 max_tokens=1024,
                 messages=[
-                    {"role": "system", "content": "You will be given a "},
+                    {"role": "system", "content": "You are a professional software engineer. Your task is to fix the issue described by the user"},
                     {"role": "user", "content": prompt}
                 ]
             )
@@ -78,11 +78,10 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
         string_context_files = "\n\n".join(context_files)
         
         prompt = f"""
-You are a professional software engineer. Your task is to fix the issue described below.
-
+Issue to solve:
 {issue_desciption}
 
-Here is the main file where the issue occurs {main_file.name}:
+Here is the main file where the issue occurs {main_file.name} and need to be fixed:
 {main_file.content}
 """
 
