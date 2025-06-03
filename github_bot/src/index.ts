@@ -17,8 +17,12 @@ export default (app: Probot) => {
 
     // Pull Request information
     const issue = context.payload.issue;
+    const issue_title = issue.title;
+    const body = issue.body;
+    const issue_body: string | undefined = body ?? "";
+
     const issue_number = issue.number;
-    const pullrequest_title = issue.title + " - Kaizen Solution.";
+    const pullrequest_title = issue_title + " - Kaizen Solution.";
 
     // Generate unique branch name
     const fileSafe = new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "_").replace(/(\d{8})(\d{4})/, "$1_$2");
@@ -30,9 +34,21 @@ export default (app: Probot) => {
     if (Kaizen_tag)
     {
 
-      //Call API
+      const params = new URLSearchParams({
+        title: issue_title,
+        description: issue_body,
+        repo_url: repo
+      });
 
-      // Context Received from API
+    fetch(`http://127.0.0.1:5000/fix_issue/${params.toString()}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
 
       const file_path = 'Example.txt.txt';
 
