@@ -177,4 +177,5 @@ cython_debug/
 chroma_db/db/
 main_test.py
 eval/custom_eval/data/training_data
+eval/custom_eval/data/eval_outputs
 ignore
