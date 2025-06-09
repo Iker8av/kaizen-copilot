@@ -20,7 +20,7 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
         self.role = ROLE.DEVELOPER
         self.purpose = ""
         self.generate_patch = False
-        self.__api_key = os.environ.get("ANTHROPIC_API_KEY") or None
+        self.__api_key = os.environ.get('ANTHROPIC_KEY')
         self.__enable_context = False
         pass
         
@@ -41,12 +41,12 @@ class LLMDeveloper(AgentBase[FileInput, LLMDeveloperOutput]):
             )
                 
             message = client.messages.create(
-                model="claude-3-5-haiku-20241022",
+                model="claude-opus-4-20250514",
                 max_tokens=1024,
                 system="You are a professional software engineer. Your task is to fix the issue described by the user",
                 messages=[
                     {"role": "user", "content": prompt}
-                ]
+                ],
             )
         
             return message.content[0].text

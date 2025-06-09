@@ -7,7 +7,8 @@ from agent.models.context import Context
 from agent.models.embedded_file import Metadata
 from agent.models.input import  FileInput
 from agent.models.mcpstep import ROLE
-from agent.models.output import FileBaseOutput, QueryFormatterOutput
+from agent.models.output import FileBaseOutput 
+from agent.models.output import QueryFormatterOutput
 from agent.tools.chromadb import ChromaDB
 from agent.tools.tool import Tool
 
@@ -38,8 +39,8 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
                 from_imports: list[str] = re.findall(r'^\s*from\s+[a-zA-Z_.][\w\.]*\s+import\s+[a-zA-Z_][\w]*', code, re.MULTILINE)
                 unique_paths = []
                 
-                possible_names = self.context.issue.repo_name.split("/")
-                from_imports = [s for s in from_imports if any(sub in s for sub in possible_names)]
+                # possible_names = self.context.issue.repo_name.split("/")
+                # from_imports = [s for s in from_imports if any(sub in s for sub in possible_names)]
                 
                 if len(from_imports) <= 0:
                     return FileBaseOutput(self.context.retrieved_files), self.context, 1
@@ -84,6 +85,10 @@ class FileResolver(AgentBase[FileInput, Union[FileBaseOutput, QueryFormatterOutp
                     
                     folders = relative_path.split("/")
                     short_path = ("/".join(folders[-2:])) + ".py"
+                    
+                    if not "/" in short_path:
+                        short_path = self.context.issue.repo_name.split("/")[-1] +"/" + short_path
+                    
                     conditionals.append({"path": short_path})
                     queries.append(query)
                 
