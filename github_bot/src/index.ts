@@ -7,12 +7,17 @@ interface FixIssuePayload {
   repo_url?: string;
 }
 
+
 export default (app: Probot) => {
+
+
   app.on("issues.opened", async (context) => {
+
     // Repo Information
     const owner = context.payload.repository.owner.login;
     const repo = context.payload.repository.name;
     const branch = "main";
+
     const installationId = context.payload.installation?.id;
 
     // Instatiate octokit with additional authentication

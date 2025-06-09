@@ -22,5 +22,6 @@ def fix_issue():
         json_output = json.dumps(asdict(solution), indent=2)
         return json_output
 
+
 if __name__ == '__main__':
     app.run()
