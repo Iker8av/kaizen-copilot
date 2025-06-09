@@ -53,20 +53,16 @@ class QueryFormatter(AgentBase[QueryFormatterInput, QueryFormatterOutput]):
         self.context = context
         issue_description = input_data.issue.description
         self.context.issue = input_data.issue
-        match = re.search(r"```(\w+)?\n(.*?)```", issue_description, re.DOTALL)
+        match = re.search(r"```(?:\s*)(.*?)(?:\s*)```", issue_description, re.DOTALL)
 
         if match:
-            language = match.group(1)
-            extension = get_extension(language)
-            code = match.group(2)
+            code = match.group(1)
             
             start, end = match.span()  
             outside_text = (issue_description[:start] + issue_description[end:]).strip()  
             
-            final_string = f"{extension}\n{outside_text}\n{code}"
+            final_string = f"{outside_text}\n{code}"
             
             return QueryFormatterOutput(queries=[final_string], conditionals=None), self.context, 1
         else:
-            raise Exception("No match found")
-        
-        pass
+            return QueryFormatterOutput(queries=[issue_description], conditionals=None), self.context, 1

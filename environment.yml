@@ -19,20 +19,28 @@ dependencies:
   - jupyter_client=8.6.3=pyhd8ed1ab_1
   - jupyter_core=5.7.2=pyh31011fe_1
   - krb5=1.21.3=h37d8d59_0
+  - libblas=3.9.0=31_h7f60823_openblas
+  - libcblas=3.9.0=31_hff6cab4_openblas
   - libcxx=20.1.4=hf95d169_1
   - libedit=3.1.20250104=pl5321ha958ccf_0
   - libexpat=2.7.0=h240833e_0
   - libffi=3.4.6=h281671d_1
+  - libgfortran=14.2.0=hef36b68_105
+  - libgfortran5=14.2.0=h58528f3_105
+  - liblapack=3.9.0=31_h236ab99_openblas
   - liblzma=5.8.1=hd471939_1
   - libmpdec=4.0.0=hfdf4475_0
+  - libopenblas=0.3.29=openmp_hbf64a52_0
   - libsodium=1.0.20=hfdf4475_0
   - libsqlite=3.49.2=hdb6dae5_0
   - libzlib=1.3.1=hd23fc13_2
+  - llvm-openmp=20.1.5=ha54dae1_0
   - matplotlib-inline=0.1.7=pyhd8ed1ab_1
   - ncurses=6.5=h0622a9a_3
   - nest-asyncio=1.6.0=pyhd8ed1ab_1
   - openssl=3.5.0=hc426f3f_1
   - packaging=25.0=pyh29332c3_1
+  - pandas=2.2.3=py39hb7d32d6_3
   - parso=0.8.4=pyhd8ed1ab_1
   - pexpect=4.9.0=pyhd8ed1ab_1
   - pickleshare=0.7.5=pyhd8ed1ab_1004
@@ -45,7 +53,9 @@ dependencies:
   - pygments=2.19.1=pyhd8ed1ab_0
   - python=3.9.22=h55ef250_1_cpython
   - python-dateutil=2.9.0.post0=pyhff2d567_1
+  - python-tzdata=2025.2=pyhd8ed1ab_0
   - python_abi=3.9=7_cp39
+  - pytz=2025.2=pyhd8ed1ab_0
   - pyzmq=26.4.0=py39hf094b8e_0
   - readline=8.2=h7cca4af_2
   - setuptools=80.1.0=pyhff2d567_0
@@ -61,9 +71,13 @@ dependencies:
   - zeromq=4.3.5=h7130eaa_7
   - zipp=3.21.0=pyhd8ed1ab_1
   - pip:
+      - aiohappyeyeballs==2.6.1
+      - aiohttp==3.12.3
+      - aiosignal==1.3.2
       - annotated-types==0.7.0
       - anyio==4.9.0
       - asgiref==3.8.1
+      - async-timeout==5.0.1
       - attrs==25.3.0
       - backoff==2.2.1
       - bcrypt==4.3.0
@@ -75,14 +89,20 @@ dependencies:
       - chromadb==1.0.8
       - click==8.1.8
       - coloredlogs==15.0.1
+      - datasets==3.6.0
       - deprecated==1.2.18
+      - dill==0.3.8
       - distro==1.9.0
       - durationpy==0.9
+      - evaluate==0.4.3
       - fastapi==0.115.9
       - filelock==3.18.0
       - flask==3.1.1
       - flatbuffers==25.2.10
-      - fsspec==2025.3.2
+      - frozenlist==1.6.0
+      - fsspec==2025.3.0
+      - gitdb==4.0.12
+      - gitpython==3.1.44
       - google-auth==2.40.1
       - googleapis-common-protos==1.70.0
       - grpcio==1.71.0
@@ -106,6 +126,8 @@ dependencies:
       - mdurl==0.1.2
       - mmh3==5.1.0
       - mpmath==1.3.0
+      - multidict==6.4.4
+      - multiprocess==0.70.16
       - networkx==3.2.1
       - numpy==1.26.4
       - oauthlib==3.2.2
@@ -124,7 +146,9 @@ dependencies:
       - overrides==7.7.0
       - pillow==11.2.1
       - posthog==4.0.1
+      - propcache==0.3.1
       - protobuf==5.29.4
+      - pyarrow==20.0.0
       - pyasn1==0.6.1
       - pyasn1-modules==0.4.2
       - pydantic==2.11.4
@@ -145,6 +169,7 @@ dependencies:
       - scipy==1.13.1
       - sentence-transformers==4.1.0
       - shellingham==1.5.4
+      - smmap==5.0.2
       - sniffio==1.3.1
       - starlette==0.45.3
       - sympy==1.14.0
@@ -165,4 +190,6 @@ dependencies:
       - websockets==15.0.1
       - werkzeug==3.1.3
       - wrapt==1.17.2
+      - xxhash==3.5.0
+      - yarl==1.20.0
 prefix: /Users/ikerochoa/opt/anaconda3/envs/kaizen-copilot

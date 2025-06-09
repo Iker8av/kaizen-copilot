@@ -16,7 +16,7 @@ class EmbeddedFile():
     
     def convert_to_file_class(self, context: Context) -> "File": # type: ignore
         from agent.models.file import File
-        code = self.document.split(f"{self.metadata.name} ")[1]
+        code = self.document.replace("[CLS]", "")
         file_type = FILE_TYPE.MAIN_FILE if len(context.retrieved_files) == 0 else FILE_TYPE.DEPENDENCY
         return File(name=self.metadata.name, path=self.metadata.path, content=code, extension=self.metadata.extension, file_type=file_type)
     

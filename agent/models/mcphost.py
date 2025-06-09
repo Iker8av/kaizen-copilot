@@ -39,7 +39,7 @@ class MCPHost:
             
             idx += next_step
             
-        print(output_data)
+        return output_data
             
     def get_log(self) -> MCPLog:
         return self.__log
